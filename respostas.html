@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Recrutamento - ICY (Infernal Cruelty)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            /* Cores principais - tema claro */
+            --primary: #1a237e;
+            --secondary: #3949ab;
+            --accent: #5c6bc0;
+            --light: #e8eaf6;
+            --dark: #283593;
+            --text: #212121;
+            --background: #f5f7ff;
+            --card: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --border: #e0e0e0;
+            --hover-bg: #f0f2ff;
+            --icon-bg: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] {
+            /* Cores tema escuro */
+            --primary: #3f51b5;
+            --secondary: #5c6bc0;
+            --accent: #7986cb;
+            --light: #3949ab;
+            --dark: #1a237e;
+            --text: #e0e0e0;
+            --background: #121212;
+            --card: #1e1e1e;
+            --card-shadow: rgba(0, 0, 0, 0.3);
+            --border: #333333;
+            --hover-bg: #2a2a2a;
+            --icon-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            overflow: hidden;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 8s infinite linear;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--accent), var(--light));
+            animation: gradientShift 5s infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            animation: slideDown 0.8s ease-out 0.2s both;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--icon-bg);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .section {
+            padding: 30px;
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s ease;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .section-title i {
+            background: var(--light);
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .section-title:hover i {
+            transform: rotate(360deg);
+            background: var(--accent);
+            color: white;
+        }
+
+        .question-item {
+            margin-bottom: 25px;
+            background: var(--background);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(92, 107, 192, 0.1) 0%, rgba(92, 107, 192, 0) 100%);
+            transition: width 0.5s ease;
+        }
+
+        .question-item:hover::before {
+            width: 100%;
+        }
+
+        .question-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px var(--card-shadow);
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .answer {
+            color: var(--text);
+            line-height: 1.7;
+            font-style: italic;
+            padding-left: 15px;
+            border-left: 2px solid var(--light);
+            transition: border-color 0.3s ease;
+        }
+
+        .essay {
+            background: var(--background);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid var(--secondary);
+            text-align: justify;
+            line-height: 1.8;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+        }
+
+        .essay::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+
+        .essay-title {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Animações escalonadas para os itens */
+        .question-item:nth-child(1) { animation-delay: 0.1s; }
+        .question-item:nth-child(2) { animation-delay: 0.2s; }
+        .question-item:nth-child(3) { animation-delay: 0.3s; }
+        .question-item:nth-child(4) { animation-delay: 0.4s; }
+        .question-item:nth-child(5) { animation-delay: 0.5s; }
+        .question-item:nth-child(6) { animation-delay: 0.6s; }
+        .question-item:nth-child(7) { animation-delay: 0.7s; }
+        .question-item:nth-child(8) { animation-delay: 0.8s; }
+        .question-item:nth-child(9) { animation-delay: 0.9s; }
+        .question-item:nth-child(10) { animation-delay: 1s; }
+        .question-item:nth-child(11) { animation-delay: 1.1s; }
+        .question-item:nth-child(12) { animation-delay: 1.2s; }
+        .question-item:nth-child(13) { animation-delay: 1.3s; }
+        .question-item:nth-child(14) { animation-delay: 1.4s; }
+        .question-item:nth-child(15) { animation-delay: 1.5s; }
+        .question-item:nth-child(16) { animation-delay: 1.6s; }
+        .question-item:nth-child(17) { animation-delay: 1.7s; }
+        .question-item:nth-child(18) { animation-delay: 1.8s; }
+        .question-item:nth-child(19) { animation-delay: 1.9s; }
+        .question-item:nth-child(20) { animation-delay: 2s; }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .question-item {
+                padding: 15px;
+            }
+        }
+
+        /* Efeito de brilho para o tema escuro */
+        [data-theme="dark"] .question-item:hover {
+            box-shadow: 0 5px 15px rgba(63, 81, 181, 0.3);
+        }
+
+        [data-theme="dark"] .essay {
+            box-shadow: 0 5px 15px rgba(63, 81, 181, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <h1><i class="fas fa-dragon"></i> Ficha de Recrutamento</h1>
+            <p>ICY - Infernal Cruelty</p>
+        </header>
+        <section class="section">
+            <h2 class="section-title">
+                <i class="fas fa-user"></i>
+                Perfil 1 - Informações Pessoais
+            </h2>
+            
+            <div class="question-item">
+                <span class="question-number">1.</span>
+                <span class="question-text">Nome e idade:</span>
+                <div class="answer">Meu nome é Álvaro, tenho 20 anos.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">2.</span>
+                <span class="question-text">Nickname:</span>
+                <div class="answer">Atualmente uso "Chaos dekoma", mas não foi um nick de minha escolha. Estou planejando alterá-lo em breve para algo que represente melhor minha identidade no jogo.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">3.</span>
+                <span class="question-text">Quanto tempo de jogo:</span>
+                <div class="answer">Tenho cerca de 5 anos de experiência no jogo, mas minha jornada começou ainda em 2017 com uma conta anterior.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">4.</span>
+                <span class="question-text">Telefone:</span>
+                <div class="answer">(no privado do discord) - Estou disponível para contato sempre que necessário para assuntos relacionados à guilda ou ao jogo.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">5.</span>
+                <span class="question-text">Discord:</span>
+                <div class="answer">Você pode me encontrar no Discord como "magicaw". É por lá que costumo me comunicar. Estou sempre disponível para conversas.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">6.</span>
+                <span class="question-text">Nome ou apelido que mais gosta de usar:</span>
+                <div class="answer">Gosto do nick de "Magicaw". É um apelido que carrego com carinho e que me representa bem tanto no jogo.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">7.</span>
+                <span class="question-text">Qual parte do seu dia você mais curte: manhã, tarde ou noite? Por quê?</span>
+                <div class="answer">Definitivamente a manhã! É quando estou livre do trabalho e posso aproveitar o dia com mais tranquilidade, seja para jogar ou para outras atividades.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">8.</span>
+                <span class="question-text">Você estuda, trabalha ou faz os dois?</span>
+                <div class="answer">Atualmente, trabalho. Minha rotina é focada no mercado de trabalho, mas sempre busco tempo para me dedicar aos meus hobbies e ao meu desenvolvimento pessoal.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">9.</span>
+                <span class="question-text">Qual seu maior passatempo fora dos jogos?</span>
+                <div class="answer">Programar é algo que me trás bastante motivação fora do mundo dos jogos. Adoro criar soluções, desenvolver projetos.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">10.</span>
+                <span class="question-text">Tem algum sonho ou objetivo que está tentando realizar?</span>
+                <div class="answer">Meu grande objetivo é me tornar um analista na área de tecnologia. Estou sempre buscando conhecimento e experiências para alcançar esse sonho e me profissionalizar cada vez mais.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">11.</span>
+                <span class="question-text">Você é mais introvertido(a), extrovertido(a) ou depende do momento?</span>
+                <div class="answer">Acredito que depende muito da pessoa com quem estou interagindo. Com pessoas que me sinto à vontade, sou mais extrovertido; caso contrário, sou mais reservado. É uma questão de conexão e confiança.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">12.</span>
+                <span class="question-text">Tem algum animal de estimação? Qual?</span>
+                <div class="answer">Sim! Tenho uma cachorra chamada Jupita.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">13.</span>
+                <span class="question-text">Qual música ou estilo musical sempre te anima?</span>
+                <div class="answer">Sou eclético - aprecio diversos estilos musicais, desde rock até MPB. A única exceção é o funk, que não é do meu gosto.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">14.</span>
+                <span class="question-text">Tem alguma série, filme ou anime favorito?</span>
+                <div class="answer">Não tenho um favorito específico, mas gosto de explorar diferentes gêneros. Mas meu foco é em animes.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">15.</span>
+                <span class="question-text">Se pudesse viajar para qualquer lugar do mundo, para onde iria?</span>
+                <div class="answer">Qualquer país da Europa seria um sonho realizado.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">16.</span>
+                <span class="question-text">Você se considera mais calmo(a) ou agitado(a)?</span>
+                <div class="answer">Meu temperamento é mais calmo. Prefiro resolver as coisas com tranquilidade e evitar conflitos sempre que possível. Acredito que a calma traz melhores soluções.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">17.</span>
+                <span class="question-text">O que te motiva a seguir em frente nos dias difíceis?</span>
+                <div class="answer">A vontade constante de me melhorar como pessoa é minha maior motivação. Acredito que cada desafio é uma oportunidade de crescimento e aprendizado, mesmo quando parece difícil.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">18.</span>
+                <span class="question-text">Você costuma fazer amizades online? Já fez alguma amizade marcante?</span>
+                <div class="answer">Sim, faço amizades online com frequência! No Rucoy, costumo interagir bastante e já fiz amizades aleatórias que se tornaram especiais. Tenho uma amizade desde 2017 com um amigo de outro jogo - mesmo ele não jogando mais Rucoy, mantemos contato até hoje e jogamos outros jogos juntos.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">19.</span>
+                <span class="question-text">Gosta de ajudar outras pessoas, mesmo que só com conversa?</span>
+                <div class="answer">Com certeza! Gosto muito de ajudar, seja dando conselhos ou até puxando um jogador de nível baixo para upar em hunts mais fortes. Acredito que a comunidade deve se apoiar e crescer junta.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">20.</span>
+                <span class="question-text">Quer deixar alguma curiosidade ou algo aleatório sobre você?</span>
+                <div class="answer">Uma curiosidade é que: Quando começo uma coisa, gosto de ir até o fim, mesmo que demore.</div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title">
+                <i class="fas fa-gamepad"></i>
+                Perfil 2 - Informações sobre o Jogo
+            </h2>
+            
+            <div class="question-item">
+                <span class="question-number">1.</span>
+                <span class="question-text">Qual seu objetivo no jogo?</span>
+                <div class="answer">Meus principais objetivos são alcançar o skill 500 com minha kina e o skill 620 com meu mage.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">2.</span>
+                <span class="question-text">Caso tivesse alguma briga entre a Icy e outra guilda, você ajudaria? E caso tomasse ks de inimigos repetidas vezes, você sairia da guilda?</span>
+                <div class="answer">Dependeria muito do motivo da briga. Não gosto de conflitos sem propósito, então analisaria a situação com cuidado para entender quem está certo. Se a guilda estiver com a razão e a causa for justa, com certeza ajudaria. Quanto ao KS, se fosse repetido e sem motivo, isso me desmotivaria, mas sair da guilda seria minha última opção, mas quando eu estiver disposto ajudo sim.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">3.</span>
+                <span class="question-text">De quais guildas você já fez parte? Já foi banido de alguma? Se sim, diga o motivo.</span>
+                <div class="answer">Já participei de algumas guildas ao longo do tempo. Na minha conta secundária, estou na SBK há mais de 5 anos - é uma guild que me acolheu no início e tenho carinho pelo pessoal. Já saí uma vez que foi para a Showland, mas a guild acabou fechando, daí voltei voltei com a SBK na qual estou nela em minha secundária. Também entrei na Void, atraído pelo nome, mas descobri que a liderança era problemática e os membros costumavam dar KS sem motivo. Acabei saindo porque não concordava com as atitudes da guild.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">4.</span>
+                <span class="question-text">Você tem confusão/desentendimento com alguém no jogo?</span>
+                <div class="answer">Não! Sempre procuro manter um relacionamento amigável com todos no jogo.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">5.</span>
+                <span class="question-text">Qual sua disponibilidade de jogar, e em que horários você costuma jogar?</span>
+                <div class="answer">Costumo jogar em dois momentos principais: de manhã, antes de ir para o trabalho, e à noite, quando chego em casa. São os períodos em que tenho mais tempo livre para me dedicar ao jogo e interagir.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">6.</span>
+                <span class="question-text">Você costuma upar junto com outros players?</span>
+                <div class="answer">Geralmente prefiro upar sozinho, pois me permite controlar meu ritmo e focar em meus objetivos. Mas não descarto a ideia de jogar em grupo - quando me sinto disposto e encontro uma boa pt (geralmente em call fico mais motivado a ficar mais tempo).</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">7.</span>
+                <span class="question-text">Quais são suas principais motivações para entrar na nossa guilda?</span>
+                <div class="answer">Ouvi falar muito bem da ICY! Pessoas me disseram que é uma guild com membros legais. Essa reputação positiva despertou meu interesse em fazer parte.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">8.</span>
+                <span class="question-text">Você gosta de participar de eventos e guerras/pvps dentro do jogo?</span>
+                <div class="answer">Sim, gosto! Mas minha participação depende da minha disponibilidade de tempo e do meu momento. Quando estou com tempo e disposição, gosto de me envolver nesses eventos.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">9.</span>
+                <span class="question-text">Qual a sua indicação para entrar na guilda?</span>
+                <div class="answer">Fui indicado pela Cruella.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">10.</span>
+                <span class="question-text">Você está disposto a ajudar outros membros da guilda quando precisarem?</span>
+                <div class="answer">Sempre, acredito que a força de uma guilda está na união de seus membros.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">11.</span>
+                <span class="question-text">Como você lida com conflitos ou desentendimentos em grupo?</span>
+                <div class="answer">Procuro sempre ouvir ambos os lados da história para entender completamente a situação. Depois, tento mediar a conversa de forma imparcial, buscando uma solução que seja justa para todos.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">12.</span>
+                <span class="question-text">Você costuma usar o chat da guilda ou outras ferramentas de comunicação?</span>
+                <div class="answer">Sim! Costumo usar bastante o chat da guilda para interagir com os membros, e também sou bem ativo no Discord, que considero uma ferramenta essencial para a comunicação e organização de atividades.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">13.</span>
+                <span class="question-text">Tem alguma experiência com liderança ou organização dentro do jogo?</span>
+                <div class="answer">Não tenho experiência formal como líder, mas já tentei mediar conflitos, com a void, mas vi que não tinha sentido.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">14.</span>
+                <span class="question-text">Você já foi roubado? Se sim, o que, e quem te roubou?</span>
+                <div class="answer">Infelizmente, já fui roubado duas vezes. Na primeira vez, perderam 54kks, e na segunda, 120kks. Não me lembro mais dos nicks dos responsáveis.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">15.</span>
+                <span class="question-text">Tem alguma dúvida ou sugestão para nossa guilda?</span>
+                <div class="answer">Por enquanto, não tenho dúvidas, pois ainda estou conhecendo a guilda. Mas com o tempo, caso tenha sugestões compartilharei.</div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title">
+                <i class="fas fa-pen-fancy"></i>
+                Perfil 3 - Redação
+            </h2>
+            <div class="essay">
+                <h3 class="essay-title">Minha Contribuição e História no Rucoy Online</h3>
+                <p>
+                    Dentro da ICY, acredito que posso agregar muito ao convívio entre os membros. Seja ajudando outros a upar, acompanhando em hunts ou participando de situações de PVP, gosto de estar presente para apoiar, dar conselhos e ouvir as experiências dos outros. Para mim, a convivência no jogo se torna muito mais rica quando conseguimos trocar vivências e criar vínculos reais.
+                </p>
+                <p>
+                    Meu estilo de jogo é voltado principalmente para o PVP e skillar, pois adoro sentir a evolução da minha conta. No entanto, quando se trata de upar, costumo variar de acordo com minha disposição, já que nem sempre consigo manter longos períodos online. Ainda assim, valorizo muito as oportunidades de crescer junto com o grupo, pois isso torna o jogo muito mais interessante e desafiador.
+                </p>
+                <p>
+                    Minha história no Rucoy sempre foi marcada pelas amizades que conquistei ao longo do tempo. Desde o início, sempre gostei de interagir com pessoas, e acredito que esse é um dos maiores diferenciais do jogo para mim. Foi justamente dessa forma que conheci a ICY: durante uma call em uma party, ouvi comentários muito positivos sobre a guilda e sobre como seus membros eram pessoas de boa convivência.
+                </p>
+                <p>
+                    No futuro, dentro da guilda, pretendo evoluir tanto em nível quanto em skills, e, acima de tudo, fortalecer as amizades que surgirem ao longo do tempo. Quero me tornar um membro ativo e contribuir para o crescimento da comunidade da ICY, sempre com respeito e dedicação.
+                </p>
+            </div>
+        </section>
+        <footer>
+            <p>Documento para recrutamento na guilda ICY - Infernal Cruelty</p>
+            <p>© 2025 - Todos os direitos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        // Função para alternar entre temas claro e escuro
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            const icon = themeToggle.querySelector('i');
+            
+            // Verificar se há um tema salvo no localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                html.setAttribute('data-theme', savedTheme);
+                updateIcon(savedTheme);
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcon(newTheme);
+            });
+            
+            function updateIcon(theme) {
+                if (theme === 'dark') {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            }
+            
+            // Adicionar efeito de paralaxe no header
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('header');
+                header.style.backgroundPosition = `center ${scrolled * 0.5}px`;
+            });
+        });
+    </script>
+</body>
+</html>
